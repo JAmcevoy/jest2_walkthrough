@@ -2,16 +2,13 @@
  * @jest-environment jsdom
  */
 
-// Each time you create a function just add it to the current const and use a ',' to separate them
-
-const { game, newGame } = require("../game");
-
+const { game, newGame, showScore } = require("../game");
 
 beforeAll(() => {
-  let fs = require('fs');
-  let fileContents = fs.readFileSync('index.html', 'utf8');
+  let fs = require("fs");
+  let fileContents = fs.readFileSync("index.html", "utf-8");
   document.open();
-  document.write();
+  document.write(fileContents);
   document.close();
 });
 
@@ -36,17 +33,21 @@ describe("game object contains correct keys", () => {
 describe("newGame works correctly", () => {
   beforeAll(() => {
     game.score = 42;
-    game.currentGame = ["button1", "button2", "button3", "button4"];
-    game.playerMoves = ["button1", "button2", "button3", "button4"];
+    game.playerMoves = ["button1", "button2"];
+    game.currentGame = ["button1", "button2"];
+    document.getElementById("score").innerText = "42";
     newGame();
   });
-  test("score is 0", () => {
-    expect(game.score).toBe(0);
+  test("should set game score to zero", () => {
+    expect(game.score).toEqual(0);
   });
-  test("playerMoves is empty", () => {
-    expect(game.playerMoves).toEqual([]);
-  })
-  test("currentGame is empty", () => {
-    expect(game.currentGame).toEqual([]);
-  })
+  test("should display 0 for the element with id of score", () => {
+    expect(document.getElementById("score").innerText).toEqual(0);
+  });
+  test("should clear the player moves array", () => {
+    expect(game.playerMoves.length).toBe(0);
+  });
+  test("should clear the computer sequence array", () => {
+    expect(game.currentGame.length).toBe(0);
+  });
 });

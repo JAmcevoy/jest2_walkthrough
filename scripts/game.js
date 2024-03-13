@@ -12,6 +12,11 @@ function newGame() {
   game.playerMoves = [];
   // reset currentGame
   game.currentGame = [];
+  showScore();
 }
 
-module.exports = { game, newGame };
+function showScore() {
+  document.getElementById("score").innerText = (0);
+}
+
+module.exports = { game, newGame, showScore };
