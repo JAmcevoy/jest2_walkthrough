@@ -1,32 +1,33 @@
 let game = {
-  score: 0,
   currentGame: [],
   playerMoves: [],
-  choices: ["button1", "button2", "button3", "button4"],
+  score: 0,
+  choices: ["button1", "button2", "button3", "button4"]
 };
 
 function newGame() {
-  // reset score
-  game.score = 0;
-  // reset playerMoves
-  game.playerMoves = [];
-  // reset currentGame
   game.currentGame = [];
+  game.playerMoves = [];
+  game.score = 0;
   showScore();
   addTurn();
+}
+
+function addTurn() {
+  game.playerMoves = [];
+  game.currentGame.push(game.choices[(Math.floor(Math.random() * 4))]);
+  // showTurns();
+}
+
+function lightsOn(circ) {
+  document.getElementById(circ).classList.add("light");
+  setTimeout(function () {
+      document.getElementById(circ).classList.remove("light");
+  }, 400);
 }
 
 function showScore() {
   document.getElementById("score").innerText = game.score;
 }
 
-function addTurn() {
-  // Clear the playerMoves array
-  game.playerMoves = [];
-  // Randomly add a button to the currentGame array
-  game.currentGame.push(game.choices[Math.floor(Math.random() * 4)]);
-  // Call showTurns() Function if implemented
-  // showTurns();
-}
-
-module.exports = { game, newGame, showScore, addTurn };
+module.exports = { game, newGame, showScore, addTurn, lightsOn };
