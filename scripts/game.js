@@ -2,8 +2,8 @@ let game = {
   score: 0,
   currentGame: [],
   playerMoves: [],
-  choices: ["button1, button2, button3, button4"],
-}
+  choices: ["button1", "button2", "button3", "button4"],
+};
 
 function newGame() {
   // reset score
@@ -13,10 +13,20 @@ function newGame() {
   // reset currentGame
   game.currentGame = [];
   showScore();
+  addTurn();
 }
 
 function showScore() {
-  document.getElementById("score").innerText = (0);
+  document.getElementById("score").innerText = game.score;
 }
 
-module.exports = { game, newGame, showScore };
+function addTurn() {
+  // Clear the playerMoves array
+  game.playerMoves = [];
+  // Randomly add a button to the currentGame array
+  game.currentGame.push(game.choices[Math.floor(Math.random() * 4)]);
+  // Call showTurns() Function if implemented
+  // showTurns();
+}
+
+module.exports = { game, newGame, showScore, addTurn };
